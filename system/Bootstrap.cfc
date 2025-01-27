@@ -327,6 +327,11 @@ component serializable="false" accessors="true" {
 							);
 					}
 
+					// If we received .html page request renderedContent is struct instead of json string
+					if(isStruct(renderedContent)){
+						renderedContent = SerializeJSON(renderedContent);
+					}
+
 					// ****** PRE-RENDER EVENTS *******/
 					var interceptorData = { renderedContent : renderedContent };
 					interceptorService.announce( "preRender", interceptorData );
